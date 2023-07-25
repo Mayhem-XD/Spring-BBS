@@ -1,4 +1,4 @@
-# Spring boot
+# SpringBoot
 
 <h1>Bulletin Board System</h1>
 
