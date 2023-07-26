@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### JKH ADD ###
+img/*
+
 ### STS ###
 .apt_generated
 .classpath
