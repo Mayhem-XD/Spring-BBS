@@ -61,4 +61,20 @@ public class UserServiceMySQLImpl implements UserService {
 			return WRONG_PASSWORD;
 	}
 
+	@Override
+	public String checkUid(String uid) {
+		User user = userDao.getUser(uid);
+		
+		if (uid.equals(null) || uid.length()<3)
+		{
+			return "사용 불가능한 ID";
+		} else {
+			if (user != null)
+				return "이미 존재하는 ID";
+			else
+				return "사용 가능한 ID";
+		}
+		
+	}
+
 }

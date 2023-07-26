@@ -30,8 +30,13 @@
 	                <table class="table table-borderless">
 	                    <tr>
 	                        <td style="width:35%"><label class="col-form-label">사용자 ID</label></td>
-	                        <td style="width:65%"><input type="text" name="uid" class="form-control"></td>
+	                        <td style="width:65%"><input type="text" name="uid" id="uid" class="form-control" placeholder="3글자 이상 입력하세요"></td>
 	                    </tr>
+	                    <tr>
+	                    
+							<td><label class="col-form-label">중복 확인</label></td>	                		
+	                		<td><span style="font:20px" id="uidCheckMsg"></span></td>
+	                	</tr>
 	                    <tr>
 	                        <td><label class="col-form-label">패스워드</label></td>
 	                        <td><input type="password" name="pwd" class="form-control"></td>

@@ -14,3 +14,4 @@
         a { text-decoration: none; }
     </style>
     <script src="/sbbs/js/aside.js"></script>
+    <script src="/sbbs/js/uidCheckMsg.js"></script>
