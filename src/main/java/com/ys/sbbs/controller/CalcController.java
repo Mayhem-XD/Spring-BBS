@@ -17,7 +17,7 @@ public class CalcController {
 		return "test/calc";
 	}
 	@PostMapping("/calc")
-	@ResponseBody
+	@ResponseBody	// 원래화면에 출력하기 위해
 	public int calcRes(@RequestParam int num1,@RequestParam int num2,@RequestParam String calc) {
 	    int result = 0;
 	    switch (calc) {
