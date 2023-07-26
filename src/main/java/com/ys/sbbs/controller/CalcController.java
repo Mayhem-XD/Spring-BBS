@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/sbbs/test")
+@RequestMapping("/test")
 
 public class CalcController {
 	@GetMapping("/calc")

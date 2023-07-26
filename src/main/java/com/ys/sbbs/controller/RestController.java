@@ -1,11 +1,12 @@
 package com.ys.sbbs.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/sbbs/rest")
+@RequestMapping("/rest")
 
 public class RestController {
-	@RequestMapping("/hello")
+	@GetMapping("/hello")
 	public String hello() {
 		return "<h1>Hello World!!!</h1>";
 	}
