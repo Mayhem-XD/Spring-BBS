@@ -6,7 +6,7 @@ target/
 
 ### JKH ADD ###
 img/*
-
+application.properties
 ### STS ###
 .apt_generated
 .classpath

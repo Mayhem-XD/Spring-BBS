@@ -139,7 +139,25 @@ public class BoardController {
 		int bid = Integer.parseInt(req.getParameter("bid"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		String files = null;
+		
+		List<MultipartFile> uploadFileList = req.getFiles("files");
+
+		List<String> fileList = new ArrayList<>();
+		for (MultipartFile part: uploadFileList) {
+			if (part.getContentType().contains("octet-stream"))		// 첨부 파일이 없는 경우 application/octet-stream
+				continue;
+			String filename = part.getOriginalFilename();
+			String uploadPath = uploadDir + "upload/" + filename;
+			try {
+				part.transferTo(new File(uploadPath));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			fileList.add(filename);
+		}
+		JsonUtil ju = new JsonUtil();
+		String files = ju.listToJson(fileList);
+		
 		Board board = new Board(bid, title, content, files);
 		boardService.updateBoard(board);
 		
