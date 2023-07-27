@@ -130,6 +130,15 @@ public class BoardController {
 	@GetMapping("/update/{bid}")
 	public String update(@PathVariable int bid, Model model) {
 		Board board = boardService.getBoard(bid);
+		
+		String jsonFiles = board.getFiles();
+		if (!(jsonFiles == null || jsonFiles.equals(""))) {
+			JsonUtil ju = new JsonUtil();
+			List<String> fileList = ju.jsonToList(jsonFiles);
+			model.addAttribute("fileList", fileList);
+		}
+		
+		
 		model.addAttribute(board);
 		return "board/update";
 	}
@@ -141,8 +150,9 @@ public class BoardController {
 		String content = req.getParameter("content");
 		
 		List<MultipartFile> uploadFileList = req.getFiles("files");
-
+		System.out.println("uploadFileList: "+uploadFileList+" size: "+uploadFileList.size());
 		List<String> fileList = new ArrayList<>();
+		
 		for (MultipartFile part: uploadFileList) {
 			if (part.getContentType().contains("octet-stream"))		// 첨부 파일이 없는 경우 application/octet-stream
 				continue;
