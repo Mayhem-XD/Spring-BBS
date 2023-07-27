@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import javax.imageio.ImageIO;
 
 public class AsideUtil {
-	
+
 	public String getTodayQuote(String filename) {
 		String result = null;
 		try {
@@ -65,4 +65,5 @@ public class AsideUtil {
 		}
 		return newFname;
 	}
+	
 }
