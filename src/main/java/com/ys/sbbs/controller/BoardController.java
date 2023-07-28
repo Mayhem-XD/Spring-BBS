@@ -64,7 +64,7 @@ public class BoardController {
 	public String detail(@PathVariable int bid, @PathVariable String uid, String option,
 						 HttpSession session, Model model) {
 		// 본인이 조회한 경우 또는 댓글 작성후에는 조회수를 증가시키지 않음
-		String sessionUid = (String) session.getAttribute("uid");
+		String sessionUid = (String) session.getAttribute("sessUid");
 		if (!uid.equals(sessionUid) && (option==null || option.equals("")))
 			boardService.increaseViewCount(bid);
 		
@@ -91,7 +91,7 @@ public class BoardController {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		List<MultipartFile> uploadFileList = req.getFiles("files");
-		String sessionUid = (String) session.getAttribute("uid");
+		String sessionUid = (String) session.getAttribute("sessUid");
 
 		List<String> fileList = new ArrayList<>();
 		for (MultipartFile part: uploadFileList) {
@@ -144,7 +144,7 @@ public class BoardController {
 	}
 	@PostMapping("/update")
 	public String updateProc(MultipartHttpServletRequest req, HttpSession session, Model model) {
-		String sessionUid = (String) session.getAttribute("uid");
+		String sessionUid = (String) session.getAttribute("sessUid");
 		int bid = Integer.parseInt(req.getParameter("bid"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
