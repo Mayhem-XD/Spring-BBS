@@ -78,12 +78,14 @@ public class BoardController {
 		model.addAttribute("board", board);
 		List<Reply> replyList = replyService.getReplyList(bid);
 		model.addAttribute("replyList", replyList);
-		return "board/detail";
+//		return "board/detail";
+		return "board/detailEditor";
 	}
 	
 	@GetMapping("/write")
 	public String writeForm() {
-		return "board/write";
+//		return "board/write";
+		return "board/writeEditor";
 	}
 	
 	@PostMapping("/write")
@@ -128,19 +130,20 @@ public class BoardController {
 	}
 	
 	@GetMapping("/update/{bid}")
-	public String update(@PathVariable int bid, Model model) {
+	public String update(@PathVariable int bid, Model model, HttpSession session) {
 		Board board = boardService.getBoard(bid);
+		board.setTitle(board.getTitle().replace("\"", "&quot;"));
+		model.addAttribute(board);
 		
-		String jsonFiles = board.getFiles();
-		if (!(jsonFiles == null || jsonFiles.equals(""))) {
+		String uploadedFiles = board.getFiles().trim();
+		if (uploadedFiles != null && uploadedFiles.contains("list")) {
 			JsonUtil ju = new JsonUtil();
-			List<String> fileList = ju.jsonToList(jsonFiles);
-			model.addAttribute("fileList", fileList);
+			List<String> fileList = ju.jsonToList(uploadedFiles);
+			session.setAttribute("fileList", fileList);
 		}
 		
 		
-		model.addAttribute(board);
-		return "board/update";
+		return "board/updateEditor";
 	}
 	@PostMapping("/update")
 	public String updateProc(MultipartHttpServletRequest req, HttpSession session, Model model) {
@@ -149,10 +152,20 @@ public class BoardController {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		
-		List<MultipartFile> uploadFileList = req.getFiles("files");
-		System.out.println("uploadFileList: "+uploadFileList+" size: "+uploadFileList.size());
-		List<String> fileList = new ArrayList<>();
+		List<String> fileList = (List<String>) session.getAttribute("fileList");
 		
+		if (fileList != null && fileList.size() > 0) {
+			String[] delFiles = req.getParameterValues("delFile");
+			if (delFiles != null && delFiles.length > 0) {
+				for (String delFile: delFiles) {
+					fileList.remove(delFile);			// fileList에서 삭제
+					File df = new File(uploadDir + delFile);	// 실제 파일 삭제
+					df.delete();
+				}
+			}
+		}
+		
+		List<MultipartFile> uploadFileList = req.getFiles("files");
 		for (MultipartFile part: uploadFileList) {
 			if (part.getContentType().contains("octet-stream"))		// 첨부 파일이 없는 경우 application/octet-stream
 				continue;
@@ -165,8 +178,7 @@ public class BoardController {
 			}
 			fileList.add(filename);
 		}
-		JsonUtil ju = new JsonUtil();
-		String files = ju.listToJson(fileList);
+		String files = new JsonUtil().listToJson(fileList);
 		
 		Board board = new Board(bid, title, content, files);
 		boardService.updateBoard(board);

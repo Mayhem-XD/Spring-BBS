@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% pageContext.setAttribute("newline", "\n"); %>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +26,7 @@
 					
 					<%-- 본인만 수정 가능 --%>
 					<c:if test="${sessUid eq board.uid}">
-                        <a href="/sbbs/board/update?bid/${board.bid}" class="ms-3"><i class="far fa-edit"></i> 수정</a>  <!-- uid, bid -->
+                        <a href="/sbbs/board/update/${board.bid}" class="ms-3"><i class="far fa-edit"></i> 수정</a>  <!-- uid, bid -->
 					</c:if>
 					<c:if test="${sessUid ne board.uid}">
 						<a href="#" class="ms-3 disabled-link"><i class="far fa-edit"></i> 수정</a>
@@ -69,19 +68,19 @@
                     	<c:if test="${reply.isMine eq 0}">
 	                        <div class="d-flex flex-row mt-1">
 	                            <div class="card bg-light text-dark w-75">
-	                            	<c:if test="${reply.uid eq uid }">
+	                            	<c:if test="${reply.uid eq sessUid }">
 		                                <div class="card-body">
-		                                <form method="post" action="/sbbs/reply/delete/${reply.rid}/${board.bid}">
+		                                
 	                                        <input type="hidden" name="bid" value="${board.bid}">
 	                                        <input type="hidden" name="uid" value="${reply.rid}">
 			                                    ${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
-			                                    <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                   	 	</form>
+			                                    <a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a>
+                                   	 	
 		                                    <br>
 		                                    ${reply.comment}
 		                                </div>
 	                                </c:if>
-	                                <c:if test="${reply.uid ne uid }">
+	                                <c:if test="${reply.uid ne sessUid }">
 	                                	<div class="card-body">
 		                                    ${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}<br>
 		                                    ${reply.comment}
@@ -94,15 +93,15 @@
 	                        <div class="d-flex flex-row-reverse mt-1">
 	                            <div class="card w-75">
 	                                <div class="card-body text-end">
-	                                	<c:if test="${reply.uid eq uid }">
-	                                		<form method="post" action="/sbbs/reply/delete/${reply.rid}/${board.bid}">
+	                                	<c:if test="${reply.uid eq sessUid }">
+	                                		
 		                                        <input type="hidden" name="bid" value="${board.bid}">
 		                                        <input type="hidden" name="uid" value="${reply.rid}">
 			                                    ${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
-	                                    		<button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                    		</form>
+	                                    		<a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a>
+                                    		
 	                                	</c:if>
-	                                	<c:if test="${reply.uid ne uid }">
+	                                	<c:if test="${reply.uid ne sessUid }">
 	                                		${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
 	                                	</c:if>
 	                                    <br>

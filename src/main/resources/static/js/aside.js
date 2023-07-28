@@ -7,6 +7,7 @@ $(document).ready(function() {
 		$('#stateInput').attr({value: $('#stateMsg').text()});
 	});
 	$('#stateMsgSubmit').click(changeStateMsg);
+	$('#setWeather').click(getWeather);
 });
 
 function changeStateMsg() {
@@ -20,5 +21,16 @@ function changeStateMsg() {
 			console.log('state message:', stateInputVal);
 			$('#stateMsg').html(stateInputVal);
 		}
-	});
+	});}
+function getWeather(){
+    let addr = $('#addr').val();
+    $.ajax({
+        type: 'GET',
+        url: '/sbbs/aside/weather',
+        data: {addr:addr},
+        success: function(result){
+            $('#weather').html(result);
+        }
+    });
+
 }

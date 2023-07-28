@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +29,19 @@ public class ReplyController {
 		boardService.increaseReplyCount(bid);
 		
 		return "redirect:/board/detail/" + bid + "/" + uid + "?option=DNI";
+	}
+	
+	@GetMapping("/delete/{rid}/{bid}")
+	public String delete(@PathVariable String rid, @PathVariable int bid) {
+		
+		return "board/deleteReply";
+	}
+	@GetMapping("/deleteConfirm/{rid}/{bid}")
+	public String deleteConfirm(@PathVariable String rid, @PathVariable int bid, HttpSession session) {
+		replyService.deleteReply(rid);
+		boardService.decreaseReplyCount(bid);
+		String sessionUid = (String) session.getAttribute("sessUid");
+		return "redirect:/board/detail/" + bid + "/" + sessionUid + "?option=DNI";
 	}
 	
 }

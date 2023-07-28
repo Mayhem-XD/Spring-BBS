@@ -71,12 +71,12 @@
 	                            <div class="card bg-light text-dark w-75">
 	                            	<c:if test="${reply.uid eq sessUid }">
 		                                <div class="card-body">
-		                                <form method="post" action="/sbbs/reply/delete/${reply.rid}/${board.bid}">
+		                                
 	                                        <input type="hidden" name="bid" value="${board.bid}">
 	                                        <input type="hidden" name="uid" value="${reply.rid}">
 			                                    ${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
-			                                    <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                   	 	</form>
+			                                    <a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a>
+                                   	 	
 		                                    <br>
 		                                    ${reply.comment}
 		                                </div>
@@ -95,12 +95,12 @@
 	                            <div class="card w-75">
 	                                <div class="card-body text-end">
 	                                	<c:if test="${reply.uid eq sessUid }">
-	                                		<form method="post" action="/sbbs/reply/delete/${reply.rid}/${board.bid}">
+	                                		
 		                                        <input type="hidden" name="bid" value="${board.bid}">
 		                                        <input type="hidden" name="uid" value="${reply.rid}">
 			                                    ${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
-	                                    		<button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                    		</form>
+	                                    		<a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a>
+                                    		
 	                                	</c:if>
 	                                	<c:if test="${reply.uid ne sessUid }">
 	                                		${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}

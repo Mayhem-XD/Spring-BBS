@@ -9,9 +9,14 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class AsideUtil {
 
 	public String getTodayQuote(String filename) {
@@ -65,5 +70,28 @@ public class AsideUtil {
 		}
 		return newFname;
 	}
+//	행안부 도로명주소 API
+	public String getRoadAddr(String place) {
+		
+		
+		return null;
+	}
+//	KAKAO Local API
+	public List<String> getGeoCode(String roadAddr){
+		
+		List<String> list = new ArrayList<>();
+		
+		
+		return list;
+		
+	}
+//	OpenWeather API
+	public String getWeather(List<String> geoCode) {
+		
+		return "가상의 날씨";
+	}
+	
+	
+	
 	
 }
