@@ -16,8 +16,8 @@ $(document).ready(function() {
         let pwd = $("#pwd").val();
         let pwd2 = $("#pwd2").val();
         if(pwd !== pwd2) {
-            $("#pwd").css("background-color", "red");
-            $("#pwd2").css("background-color", "red");
+            $("#pwd").css("background-color", "#ffc1cc");
+            $("#pwd2").css("background-color", "#ffc1cc");
         } else {
             $("#pwd").css("background-color", "#ccff00");
             $("#pwd2").css("background-color", "#ccff00");
