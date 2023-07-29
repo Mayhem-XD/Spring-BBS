@@ -23,4 +23,7 @@ $(document).ready(function() {
             $("#pwd2").css("background-color", "#ccff00");
         }
     });
+    
+    
+    
 });
