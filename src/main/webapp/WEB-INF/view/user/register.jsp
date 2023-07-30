@@ -50,9 +50,17 @@
 	                        <td><input type="text" name="uname" class="form-control"></td>
 	                    </tr>
 	                    <tr>
-	                        <td><label class="col-form-label">이메일</label></td>
-	                        <td><input type="text" name="email" class="form-control"></td>
-	                    </tr>
+						    <td><label class="col-form-label">이메일</label></td>
+						    <td>
+						        <div class="input-group">
+						            <input type="text" name="email" id="email" class="form-control">
+						            <select class="form-select" name="emailDomain" id="emailDomain" onchange="updateEmail()">
+						                <option selected>@gmail.com</option>
+						                <option>@naver.com</option>
+						            </select>
+						        </div>
+						    </td>
+						</tr>
 	                    <tr>
 	                        <td><label class="col-form-label">사진</label></td>
 	                        <td><input type="file" name="profile" class="form-control"></td>
