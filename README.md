@@ -16,7 +16,8 @@ Maven과 mySQL을 사용한 simple spring boot BBS project
 
 > ext jar 3개
 > bcrypt
-> tomcat9
+> ocn.home
+> pc 이름 확인
 > 
 <hr>
 <br><br>
