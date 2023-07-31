@@ -57,10 +57,14 @@
 						    <td><label class="col-form-label">이메일</label></td>
 						    <td>
 						        <div class="input-group">
-						            <input type="text" name="email" id="email" class="form-control">
+						            <input type="text" name="email" id="email" class="form-control" value="${user.email}">
 						            <select class="form-select" name="emailDomain" id="emailDomain" onchange="updateEmail()">
-						                <option selected>@gmail.com</option>
+						                <option selected>@DOMAIN.com</option>
+						                <option>@gmail.com</option>
 						                <option>@naver.com</option>
+						                <option>@yahoo.com</option>
+						                <option>@empas.com </option>
+						                <option>@msn.com</option>
 						            </select>
 						        </div>
 						    </td>
