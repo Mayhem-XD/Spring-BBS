@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,14 @@ public class AsideUtil {
 	}
 //	행안부 도로명주소 API
 	public String getRoadAddr(String place) {
-		
+		String apiUrl = "https://www.juso.go.kr/addrlink/addrLinkApiJsonp.do";
+		String roadAddrKey = "";
+		try {
+			String keyword = URLEncoder.encode(place,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return null;
 	}

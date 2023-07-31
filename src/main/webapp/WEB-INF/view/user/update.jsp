@@ -11,6 +11,13 @@
 		td, th {text-align: center;}
 		.disable-link {pointer-events: none;}
 	</style>
+	<script>
+	function updateEmail() {
+        var emailInput = document.querySelector('#email');
+        var emailSelect = document.querySelector('#emailDomain');
+        emailInput.value = emailInput.value.split('@')[0] + emailSelect.value;
+    }
+	</script>
 </head>
 <body>
 	<%@ include file="../common/top.jspf" %>
@@ -47,9 +54,17 @@
 			                        <td><input type="password" name="pwd2" class="form-control"></td>
 			                    </tr>
 			                    <tr>
-			                        <td><label class="col-form-label">이메일</label></td>
-			                        <td><input type="text" name="email" class="form-control" value="${user.email}"></td>
-			                    </tr>
+						    <td><label class="col-form-label">이메일</label></td>
+						    <td>
+						        <div class="input-group">
+						            <input type="text" name="email" id="email" class="form-control">
+						            <select class="form-select" name="emailDomain" id="emailDomain" onchange="updateEmail()">
+						                <option selected>@gmail.com</option>
+						                <option>@naver.com</option>
+						            </select>
+						        </div>
+						    </td>
+						</tr>
 			                    <tr>
 			                        <td><label class="col-form-label">사진</label></td>
 			                        <td><input type="file" name="profile" class="form-control" ></td>

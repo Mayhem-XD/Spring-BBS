@@ -7,6 +7,13 @@
 <html>
 <head>
 	<%@ include file="../common/head.jspf" %>
+	<script>
+	function updateEmail() {
+        var emailInput = document.querySelector('#email');
+        var emailSelect = document.querySelector('#emailDomain');
+        emailInput.value = emailInput.value.split('@')[0] + emailSelect.value;
+    }
+	</script>
 </head>
 <body>
 	<body>

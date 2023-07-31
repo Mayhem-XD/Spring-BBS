@@ -35,8 +35,4 @@ function getWeather(){
 
 }
 
-function updateEmail() {
-        var emailInput = document.querySelector('#email');
-        var emailSelect = document.querySelector('#emailDomain');
-        emailInput.value = emailInput.value.split('@')[0] + emailSelect.value;
-    }
+
