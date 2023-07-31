@@ -23,7 +23,7 @@ function changeStateMsg() {
 		}
 	});}
 function getWeather(){
-    let addr = $('#addr').val();
+    let addr = $('#addr').text();
     $.ajax({
         type: 'GET',
         url: '/sbbs/aside/weather',
@@ -33,6 +33,6 @@ function getWeather(){
         }
     });
 
-}
+};
 
 
