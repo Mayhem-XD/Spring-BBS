@@ -1,0 +1,43 @@
+package com.ys.sbbs.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.ys.sbbs.entity.Board;
+
+@Mapper
+public interface BoardDaoOracle {
+
+	@Select( "SELECT b.bid, b.\"uid\", b.title, b.content, b.modTime, b.viewCount, "
+			+ "	b.replyCount, b.files, u.uname FROM board b "
+			+ "	JOIN users u ON b.\"uid\"=u.\"uid\" WHERE b.bid=#{bid}")
+	Board getBoard(int bid);
+	
+	@Select("select count(bid) from board where isDeleted=0 AND ${field} like #{query}")
+	int getBoardCount(String field, String query);
+	
+	@Select("select * from (select rownum rnum, b.bid, b.\"uid\", b.title, b.content, b.modTime,"
+			+ " b.viewCount, b.replyCount, b.files, u.uname from board b join users u on b.\"uid\"=u.\"uid\""
+			+ " where rownum <= 10 and b.isDeleted=0 AND ${field} LIKE #{query}"
+			+ " order by b.modTime desc) where rnum > #{offset}")
+	List<Board> listBoard(String field, String query, int offset);
+	
+	@Insert("insert into board values(default, #{uid}, #{title}, #{content}, default, default, default, default, #{files})")
+	void insertBoard(Board board);
+	
+	@Update("update board set title=#{title}, content=#{content}, modTime=CURRENT_TIMESTAMP, files=#{files} where bid=#{bid}")
+	void updateBoard(Board board);
+	
+	@Update("UPDATE board SET isDeleted=1 WHERE bid=#{bid}")
+	void deleteBoard(int bid);
+	
+	@Update("update board set ${field}=${field}+1 where bid=#{bid}")
+	void increaseCount(String field, int bid);
+	
+	@Update("update board set replyCount=replyCount-1 where bid=#{bid}")
+	void decreaseReplyCount(int bid);
+}
