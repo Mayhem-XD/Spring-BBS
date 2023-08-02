@@ -26,7 +26,7 @@ public class UserServiceOracleImpl implements UserService {
 
 	@Override
 	public List<User> getUserList(int page) {
-		int maxrow= page * 3;
+		int maxrow= page * 10;
 		int offset = (page - 1) * 10;
 		List<User> list = userDao.getUserList(maxrow, offset);
 		return list;

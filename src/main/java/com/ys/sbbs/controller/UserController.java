@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,7 @@ import com.ys.sbbs.utility.AsideUtil;
 public class UserController {
 	@Autowired private UserService userService;
 	@Value("${spring.servlet.multipart.location}") private String uploadDir;
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@GetMapping("/register")
 	public String registerForm() {
@@ -54,7 +57,7 @@ public class UserController {
 		if (pwd.equals(pwd2) && pwd.length()>=1) {
 			String hashedPwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
 			String filename = null;
-			if (filePart != null) {
+			if (filePart.getContentType().contains("image")) {
 				filename = filePart.getOriginalFilename();
 				String profilePath = uploadDir + "profile/" + filename;
 				try {
@@ -101,6 +104,7 @@ public class UserController {
 			session.setAttribute("stateMsg", stateMsg);
 			
 			// 환영 메세지
+			log.info("Info Login: {}, {}", uid, user.getUname());
 			model.addAttribute("msg", user.getUname() + "님 환영합니다.");
 			model.addAttribute("url", "/sbbs/board/list?p=1&f=&q=");
 //			model.addAttribute("url", "/sbbs/user/list/1");
@@ -149,6 +153,7 @@ public class UserController {
 		String uid = req.getParameter("uid");
 		String hashedPwd = req.getParameter("hashedPwd");
 		String oldFilename = req.getParameter("filename");
+		String oldEmail = req.getParameter("oldEmail");
 		String pwd = req.getParameter("pwd");
 		String pwd2 = req.getParameter("pwd2");
 		String uname = req.getParameter("uname");
@@ -156,9 +161,11 @@ public class UserController {
 		MultipartFile filePart = req.getFile("profile");
 		String addr = req.getParameter("addr");
 		
-		System.out.println("oldFilename : "+oldFilename+", filePart"+filePart);
+		log.info("Info oldFilename: {}, filePart {}", oldFilename, filePart);
 		
-		
+		boolean emailFlag = false;
+		if(!(email.contains("@")))
+			emailFlag = true;
 		
 		boolean pwdFlag = false;
 		if (pwd != null && pwd.length() > 1 && pwd.equals(pwd2)) {
@@ -166,20 +173,15 @@ public class UserController {
 			pwdFlag = true;
 		} 
 		String filename = null;
-		if (filePart != null) {		// 새로운 이미지로 변경
+		if (filePart.getContentType().contains("image")) {		// 새로운 이미지로 변경
 			if (oldFilename != null) {		// 기존 이미지가 있으면 이미지 삭제
 				File oldFile = new File(uploadDir + "profile/" + oldFilename);
 				oldFile.delete();
-				
-				System.out.println("oldFilename : "+oldFilename+" filename : "+ filename+", oldFile: "+oldFile);
-				
 			}
 			// 이미지를 저장하고, 스퀘어 이미지로 변경. register code와 동일
 			filename = filePart.getOriginalFilename();
 			String profilePath = uploadDir + "profile/" + filename;
-			
-			System.out.println("profilePath "+profilePath+" , uploadDir "+uploadDir+", filename "+filename);
-			
+			log.info("Info profilePath: {}, filename {}", profilePath, filename);
 			try {
 				filePart.transferTo(new File(profilePath));
 			} catch (Exception e) {
@@ -189,6 +191,8 @@ public class UserController {
 			filename = au.squareImage(uploadDir + "profile/", filename);
 		} else
 			filename = oldFilename;
+		if(emailFlag)
+			email = oldEmail;
 		
 		User user = new User(uid, hashedPwd, uname, email, filename, addr);
 		userService.updateUser(user);

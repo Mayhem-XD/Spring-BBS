@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ys.sbbs.dao.BoardDaoMySQL;
 import com.ys.sbbs.entity.Board;
 
-@Service
+//@Service
 public class BoardServiceMySQLImpl implements BoardService {
 
 	@Autowired private BoardDaoMySQL boardDao;

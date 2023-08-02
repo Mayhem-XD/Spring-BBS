@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ys.sbbs.dao.UserDaoMySQL;
 import com.ys.sbbs.entity.User;
 
-@Service
+//@Service
 
 public class UserServiceMySQLImpl implements UserService {
 	@Autowired private UserDaoMySQL userDao;

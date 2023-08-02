@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ys.sbbs.dao.ReplyDaoMySQL;
 import com.ys.sbbs.entity.Reply;
-@Service
+//@Service
 public class ReplyServiceMySQLImpl implements ReplyService {
 
 	@Autowired private ReplyDaoMySQL replyDao;
