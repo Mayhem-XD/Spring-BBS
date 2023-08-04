@@ -3,7 +3,7 @@
 <h1>Bulletin Board System</h1>
 
 <p>
-Maven과 mySQL을 사용한 simple spring boot BBS project
+Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 </p>
 
 <h3>개발 도구</h3>
