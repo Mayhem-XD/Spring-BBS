@@ -29,7 +29,7 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 > Java Version : 11   Language : Java
 > Group : com.ys <br>
 > Artifact : sbbs <br>
-> Packaging : WAR <br>
+> Version: 0.0.1-SNAPSHOT <br>
 > Name : maven bbs project <br>
 > Description : Bulletin Board Service <br>
 > server.xml, context.xml 수정
