@@ -25,8 +25,10 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 <h4>일단 과정 수정중</h4>
 
 > New -> Maven simple project 체크 <br>
-> Group id : com.ys <br>
-> Artifact id : bbs <br>
+> Type : Maven	Packaging  : Jar <br>
+> Java Version : 11   Language : Java
+> Group : com.ys <br>
+> Artifact : sbbs <br>
 > Packaging : WAR <br>
 > Name : maven bbs project <br>
 > Description : Bulletin Board Service <br>
