@@ -30,9 +30,13 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 > Group : com.ys <br>
 > Artifact : sbbs <br>
 > Version: 0.0.1-SNAPSHOT <br>
-> Name : maven bbs project <br>
-> Description : Bulletin Board Service <br>
-> server.xml, context.xml 수정
+> Description : BBS project for Spring Boot <br>
+> Spring Boot Version : 2.7.14 <br>
+> Lombok <br>
+> MyBatis Framework <br>
+> MySQL Driver <br>
+> Oracle Driver <br>
+> Spring Web <br>
 
 ~~~ java
 
