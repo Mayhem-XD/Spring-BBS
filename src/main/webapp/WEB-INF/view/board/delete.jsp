@@ -16,7 +16,7 @@
         	<%@ include file="../common/aside.jspf" %>
         	<!-- ============================== main ============================ -->
         	<div class="col-sm-9">
-        		<h3><strong>회원 탈퇴</strong></h3><hr>
+        		<h3><strong>게시글 삭제</strong></h3><hr>
         		<div class="row">
         			<div class="col-3"></div>
         			<div class="col-6">
