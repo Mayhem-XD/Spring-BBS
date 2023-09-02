@@ -15,10 +15,10 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 <h2>수정중</h2>
 
 > ext jar 3개
-> bcrypt
-> ocn.home
-> pc 이름 확인
-> 
+> bcrypt<br>
+> ocn.home<br>
+> pc 이름 확인<br>
+> oracle server 설치순서
 <hr>
 <br><br>
 
