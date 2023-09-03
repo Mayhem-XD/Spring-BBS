@@ -33,6 +33,7 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 > Description : BBS project for Spring Boot <br>
 > Spring Boot Version : 2.7.14 <br>
 > Lombok <br>
+> Lombok 추가 설치 <br>  
 > MyBatis Framework <br>
 > MySQL Driver <br>
 > Oracle Driver <br>
@@ -41,6 +42,7 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 > PC이름, 사용자 이름 영어로 <br>
 > Spring boot 설정 <br>
 > JSP 사용하기 위한 확장 설치<br>
+> schedul 추가
 
 ~~~ java
 
