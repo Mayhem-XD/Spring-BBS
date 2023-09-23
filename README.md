@@ -38,6 +38,7 @@ Maven과 mySQL, Oracle을 사용한 simple spring boot BBS project
 > MySQL Driver <br>
 > Oracle Driver <br>
 > Spring Web <br>
+> mySQL 메인 <br>
 > Oracle 설치 <br>
 > PC이름, 사용자 이름 영어로 <br>
 > Spring boot 설정 <br>
