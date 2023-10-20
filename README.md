@@ -133,6 +133,38 @@ $(document).ready(function() {
 
 ~~~
 
+~~~ java
+// email 입력 받는 부분
+ <tr>
+	<td><label class="col-form-label">이메일</label></td>
+	<td>
+		<div class="input-group">
+		<input type="text" name="email" id="email" class="form-control">
+		<select class="form-select" name="emailDomain" id="emailDomain" onchange="updateEmail()">
+		<option selected>@DOMAIN.com</option>
+			<option>@gmail.com</option>
+			<option>@naver.com</option>
+			<option>@yahoo.com</option>
+			<option>@empas.com </option>
+			<option>@msn.com</option>
+		</select>
+		</div>
+	</td>
+</tr>
+
+~~~
+
+~~~ js
+
+<script>
+	function updateEmail() {
+        var emailInput = document.querySelector('#email');
+        var emailSelect = document.querySelector('#emailDomain');
+        emailInput.value = emailInput.value.split('@')[0] + emailSelect.value;
+    }
+</script>
+
+~~~
 
 
 
