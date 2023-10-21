@@ -166,7 +166,35 @@ $(document).ready(function() {
 
 ~~~
 
+~~~ jsp
 
+<c:forEach var="reply" items="${replyList}">
+	<c:if test="${reply.isMine eq 0}">
+		<div class="d-flex flex-row mt-1">
+			<div class="card bg-light text-dark w-75">
+				<c:if test="${reply.uid eq sessUid }">
+					<div class="card-body">
+	                                        <input type="hidden" name="bid" value="${board.bid}">
+	                                        <input type="hidden" name="uid" value="${reply.rid}">
+						${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
+						<a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a><br>
+						${reply.comment}
+					</div>
+				</c:if>
+				<c:if test="${reply.uid ne sessUid }">
+					<div class="card-body">
+						${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}<br>
+						${reply.comment}
+					</div>
+				</c:if>
+			</div>
+		</div>
+	</c:if>
+	
+</c:forEach>
+
+
+~~~
 
 <br><br>
 
