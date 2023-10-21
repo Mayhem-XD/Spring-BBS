@@ -168,6 +168,8 @@ $(document).ready(function() {
 
 ~~~ jsp
 
+// 댓글 기능 본인 댓글이면 삭제 가능 현재 게시글 작성 여부에 따라 댓글 위치 조정
+
 <c:forEach var="reply" items="${replyList}">
 	<c:if test="${reply.isMine eq 0}">
 		<div class="d-flex flex-row mt-1">
@@ -190,7 +192,24 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</c:if>
-	
+	<c:if test="${reply.isMine eq 1}">
+		<div class="d-flex flex-row-reverse mt-1">
+			<div class="card w-75">
+				<div class="card-body text-end">
+					<c:if test="${reply.uid eq sessUid }">		
+						<input type="hidden" name="bid" value="${board.bid}">
+						<input type="hidden" name="uid" value="${reply.rid}">
+						${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
+						<a href="/sbbs/reply/delete/${reply.rid}/${board.bid}"><i class="fa-solid fa-trash"></i></a>
+					</c:if>
+					<c:if test="${reply.uid ne sessUid }">
+						${reply.uname}&nbsp;&nbsp;${fn:replace(reply.regTime, 'T', ' ')}
+					</c:if><br>
+	                                    ${reply.comment}
+				</div>
+			</div>
+		</div>
+	</c:if>
 </c:forEach>
 
 
