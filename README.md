@@ -206,6 +206,28 @@ $(document).ready(function() {
 
 ~~~
 
+
+<br><br>
+
+~~~ java
+
+// 파일 업로드
+List<String> fileList = new ArrayList<>();
+		for (MultipartFile part: uploadFileList) {
+			if (part.getContentType().contains("octet-stream"))		// 첨부 파일이 없는 경우 application/octet-stream
+				continue;
+			String filename = part.getOriginalFilename();
+			String uploadPath = uploadDir + "upload/" + filename;
+			try {
+				part.transferTo(new File(uploadPath));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			fileList.add(filename);
+
+~~~
+
+
 <br><br>
 
 
